@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raumpsychologie v3.2</title>
+  <meta name="theme-color" content="#e9f2ee" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/icon-512.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 id="logo">🪴 Raumpsychologie</h1>
+    <nav class="nav">
+      <button data-view="home" class="primary">Wohnung</button>
+      <button data-view="scan">RaumScan</button>
+      <button data-view="reso">Resonanz</button>
+      <button data-view="bind">Bindung</button>
+      <button data-view="info">Info</button>
+    </nav>
+    <div class="actions">
+      <button id="btn-theme" title="Hell/Dunkel">☾</button>
+      <select id="lang" title="Sprache">
+        <option value="de" selected>DE</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section id="precheck" class="card hidden">
+      <h2>🧭 Realität oder Reaktion?</h2>
+      <p class="muted">Bevor du beginnst, nimm dir 20 Sekunden:</p>
+      <ol>
+        <li>Atme ruhig – <em>länger aus</em> als ein.</li>
+        <li>Spüre: beobachtest du – oder reagierst du?</li>
+        <li>Sag dir: „Ich darf prüfen, ohne anzugreifen.“</li>
+      </ol>
+      <div class="row">
+        <button id="pre-next" class="primary">Weiter</button>
+        <button id="pre-cancel">Abbrechen</button>
+      </div>
+    </section>
+
+    <section id="home" class="card">
+      <h2>🏡 Wohnung Check</h2>
+      <p class="muted">Schätze jeden Raum: 1 = unruhig · 10 = sehr ruhig</p>
+      <div id="rooms"></div>
+      <div id="home-result" class="badge">Gesamt: –</div>
+      <p id="home-tip" class="muted"></p>
+      <div class="row">
+        <button id="home-save" class="primary">Heute speichern</button>
+        <button id="home-repeat">Heute wiederholen</button>
+      </div>
+    </section>
+
+    <section id="scan" class="card hidden">
+      <h2>🔎 RaumScan</h2>
+      <p class="muted">1 = unruhig · 10 = sehr ruhig</p>
+      <div id="scan-sliders"></div>
+      <div id="scan-result" class="badge">–</div>
+      <div class="row">
+        <button id="scan-save" class="primary">Heute speichern</button>
+        <button id="scan-reset">Zurücksetzen</button>
+      </div>
+    </section>
+
+    <section id="reso" class="card hidden">
+      <h2>🪞 Resonanz‑Check</h2>
+      <div class="pre-note muted">Vor dem Start erscheint kurz „Realität oder Reaktion?“</div>
+      <div id="reso-qs"></div>
+      <div id="reso-result" class="badge">–</div>
+      <p id="reso-tip" class="muted"></p>
+      <div class="row">
+        <button id="reso-done" class="primary">Test abschließen</button>
+      </div>
+    </section>
+
+    <section id="bind" class="card hidden">
+      <h2>🧭 Bindungs‑Reality‑Check</h2>
+      <h3 class="sub">Frühwarnzeichen: Lovebombing & Spiegel</h3>
+      <div id="lovebomb"></div>
+      <h3 class="sub">Hauptfragen</h3>
+      <div id="bind-main"></div>
+      <h3 class="sub">Ja/Nein‑Prüfung</h3>
+      <div id="bind-yn"></div>
+      <div class="row mt">
+        <textarea id="bind-free" placeholder="Als du zuletzt eine schwere Zeit überwunden hast – was hast du gelernt? (optional)"></textarea>
+      </div>
+      <div id="bind-result" class="badge">–</div>
+      <p id="bind-tip" class="muted"></p>
+      <div class="row">
+        <button id="bind-done" class="primary">Test abschließen</button>
+      </div>
+    </section>
+
+    <section id="info" class="card hidden">
+      <h2>🕊 Info / Nutzungshinweis</h2>
+      <div class="info-block" id="public-frame">
+        <h3>Über diese Anwendung</h3>
+        <p>Diese App dient nicht dazu, Menschen zu beurteilen oder zu entlarven. Sie unterstützt dich dabei, deine Energie zu schützen, Muster früh zu erkennen und dich auf elegante Weise zu distanzieren – ohne Feindbilder, ohne Vergeltung. Klarheit ersetzt Konfrontation. Du bleibst ruhig, würdevoll und frei.</p>
+        <ul>
+          <li>Keine Diagnosen, keine Etiketten – nur Beobachtbares.</li>
+          <li>Alle Daten bleiben lokal auf deinem Gerät.</li>
+          <li>Sie ersetzt keine Therapie oder Beratung.</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <h3>🌿 Nutzung im Alltag</h3>
+        <p>Diese App ist kein Werkzeug, um dich zu kontrollieren, sondern ein Spiegel, der dir hilft, Ruhe und Klarheit zu halten.</p>
+        <h4>Wann benutzen?</h4>
+        <ul>
+          <li>Wenn Chaos, Gedankenflut oder Unsicherheit aufkommen.</li>
+          <li>Wenn du dich in Aufgaben, Beziehungen oder Emotionen verlierst.</li>
+          <li>Wenn du Raum schaffen willst – äußerlich oder innerlich.</li>
+        </ul>
+        <h4>Wie benutzen?</h4>
+        <ol>
+          <li>Nur einmal täglich aktiv nutzen – dann loslassen.</li>
+          <li>Einen Bereich pro Tag.</li>
+          <li>Nach dem Abschluss: „Nachbeben“ durchlaufen.</li>
+          <li>Dann: Handy weglegen, atmen, Leben leben.</li>
+        </ol>
+        <h4>Woran merkst du, dass es wirkt?</h4>
+        <ul>
+          <li>Du brauchst sie seltener.</li>
+          <li>Du erkennst Muster früher, ohne Test.</li>
+          <li>Du fühlst dich ruhig – nicht stolz.</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <h3>🕊 Diplomatie statt Drama</h3>
+        <p>Carnegie‑Leitlinien für den eleganten Rückzug – als einseitige PDF.</p>
+        <a class="link" href="assets/carnegie-exit.pdf" target="_blank" rel="noopener">PDF öffnen</a>
+      </div>
+
+      <div class="info-block muted small">
+        <p><strong>Private Rahmung (versteckt):</strong> Doppeltippe auf „🪴 Raumpsychologie“ oben, um den Text nur für dich zu lesen.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small>© 2025 – Raumpsychologie v3.2 • lokal • offlinefähig</small>
+  </footer>
+
+  <dialog id="modal" class="sheet"></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
